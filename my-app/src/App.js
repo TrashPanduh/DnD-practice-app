@@ -1,77 +1,67 @@
 import React, { Component } from 'react';
 import './App.css';
-import Todos from './components/Todos';
+import CharacterData from './components/CharacterAttribute'
 
 class App extends Component {
-  state = {
-    todos: [
-      {
-        id: 1,
-        title: "Strength",
-        value: 12,
-        completed: false
-      },
-      {
-        id: 2,
-        title: "Dexterity",
-        value: 18,
-        completed: false   
-      },     
-      {
-        id: 3,
-        title: "Constitution",
-        value: 17,
-        completed: false
-      },
-      {
-        id: 4,
-        title: "Intelligence",
-        value: 12,
-        completed: false
-      },
-      {
-        id: 5,
-        title: "Wisdom",
-        value: 13,
-        completed: false
-      },
-      {
-        id: 6,
-        title: "Charisma",
-        value: 15,
-        completed: false
-      },
-    ]
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      editing: false,
+      attributes: [
+        {
+          title: "Strength",
+          default: 12,
+        },
+        {
+          title: "Dexterity",
+          default: 18,
+        },
+        {
+          title: "Constitution",
+          default: 17,
+        },
+        {
+          title: "Intelligence",
+          default: 12,
+        },
+        {
+          title: "Wisdom",
+          default: 13,
+        },
+        {
+          title: "Charisma",
+          default: 15,
+        },
+      ]
+    }
   }
 
-  markComplete = (id) => {
-    this.setState({ todos: this.state.todos.map(todo => {
-      if(todo.id === id) {
-        todo.completed = !todo.completed}
-        return todo;
-    }) });
+  beginEdit() {
+    this.setState({
+      editing: true
+    })
   }
-  markComplete = () => {console.log('From app.js')}
+
+  cancelEdit() {
+    this.setState({
+      editing: true
+    })
+  }
+
   render() {
-    console.log(this.state.todos)
-  
-    return(
+    return (
       <div className="App">
-        <h1>Attributes</h1>
-        <Todos todos={this.state.todos} markComplete={this.markComplete}  />
-        
-        { /* create an uordered list from the state array */ }
         <ul>
           {
-            this.state.todos
-              .filter(todo => todo.completed)
-              .map(todo => {
-                return <li>{todo.title}</li>
+            this.state.attributes
+              .map(attribute => {
+                return <CharacterData title={attribute.title} default={attribute.default} />
               })
           }
         </ul>
       </div>
-  );
+    );
   }
 }
 
