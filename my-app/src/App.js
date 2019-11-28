@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import CharacterData from './components/CharacterAttribute'
+import './components/Characterbackground'
+import CharacterBackground from './components/Characterbackground';
+
 
 class App extends Component {
   constructor(props) {
@@ -52,6 +55,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h2>Character Info
+          {
+            this.state.background
+              .map(background => {
+                return <CharacterBackground title={background.name} />
+              })
+          }
+        </h2>
         <ul>
           {
             this.state.attributes
